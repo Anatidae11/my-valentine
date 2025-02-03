@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Web</title>
+    <style>
+        body {
+            background-color: #f8c8d0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        .content {
+            margin-top: 50px;
+            padding: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            font-size: 18px;
+            margin: 10px;
+            width: 80%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 250px;
+            box-sizing: border-box;
+        }
+        #noButton {
+            position: relative;
+            transition: all 0.1s;
+        }
+        .hidden {
+            display: none;
+        }
+        .error-message {
+            font-size: 1.5em;
+            color: red;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            input[type="text"], input[type="password"], button {
+                width: 90%;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2em;
+            }
+            input[type="text"], input[type="password"], button {
+                width: 95%;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Halaman pertama: Login -->
+<div id="page1" class="content">
+    <h1>Hi Fi ^^ Wanna ask you somthing in a different way</h1>
+    <div>
+        <label for="id">Surname (4 digits lowercase):</label><br>
+        <input type="text" id="id" maxlength="4"><br>
+        <label for="password">Birthday (ddmmyyyy):</label><br>
+        <input type="password" id="password" maxlength="8"><br>
+        <button onclick="validateLogin()">Submit</button>
+    </div>
+</div>
+
+<!-- Halaman kedua: Will you be my Valentine -->
+<div id="page2" class="content hidden">
+    <h1>Will you be my Valentine?</h1>
+    <img src="https://media.tenor.com/eX1d6fukpNQAAAAi/begging-cat-cat.gif"><br><br>
+    <button id="yesButton" onclick="nextPage(3)">Yes</button>
+    <button id="noButton" onclick="moveButton()" onmouseover="moveButton()">No</button>
+</div>
+
+<!-- Halaman ketiga: Yeay! Can we meet on 14th Friday night? -->
+<div id="page3" class="content hidden">
+    <h1>Yeay! Can we meet on 14th Friday night?</h1>
+    <img src="https://media.tenor.com/1QR1IU5NfkcAAAAi/cute-cats.gif"><br><br>
+    <button onclick="nextPage(4)">Sure</button>
+    <button onclick="nextPage(5)">Reschedule</button><br><br>
+    <button onclick="goBack(2)">Back</button>
+</div>
+
+<!-- Halaman keempat: Yippie! I’ll pick you up after work -->
+<div id="page4" class="content hidden">
+    <h1>Yippie! I’ll pick you up after work</h1>
+    <img src="https://media.tenor.com/U5BGC4QLHQAAAAAi/peach-and-goma-peach-goma.gif"><br><br>
+    <button onclick="goBack(2)">Home</button>
+</div>
+
+<!-- Halaman kelima: A'right, hmu on my WhatsApp to discuss about it ^^ -->
+<div id="page5" class="content hidden">
+    <h1>A’right, hmu on my WhatsApp to discuss about it ^^</h1>
+    <img src="https://media.tenor.com/cq1P9YKxOJcAAAAi/%E6%91%87%E6%91%86-peach-cat-and-goma.gif"><br><br>
+    <button onclick="goBack(2)">Home</button>
+</div>
+
+<!-- Halaman Error: You're not VV, who are you?! -->
+<div id="errorPage" class="content hidden">
+    <h1 class="error-message">You’re not VV, who are you?!</h1>
+    <img src="https://media.tenor.com/Fw-qV_ua8pkAAAAi/cute.gif"><br><br>
+    <button onclick="goBack(1)">Back</button>
+</div>
+
+<script>
+    function validateLogin() {
+        var userId = document.getElementById("id").value;
+        var userPassword = document.getElementById("password").value;
+        if (userId === "fifi" && userPassword === "15061998") {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page2").classList.remove("hidden");
+        } else {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("errorPage").classList.remove("hidden");
+        }
+    }
+
+    function nextPage(page) {
+        document.getElementById("page2").classList.add("hidden");
+        document.getElementById("page3").classList.add("hidden");
+        document.getElementById("page4").classList.add("hidden");
+        document.getElementById("page5").classList.add("hidden");
+        document.getElementById("errorPage").classList.add("hidden");
+
+        document.getElementById("page" + page).classList.remove("hidden");
+    }
+
+    function goBack(page) {
+        document.getElementById("page2").classList.add("hidden");
+        document.getElementById("page3").classList.add("hidden");
+        document.getElementById("page4").classList.add("hidden");
+        document.getElementById("page5").classList.add("hidden");
+        document.getElementById("errorPage").classList.add("hidden");
+
+        document.getElementById("page" + page).classList.remove("hidden");
+    }
+
+    function moveButton() {
+        var button = document.getElementById("noButton");
+        var randomX = Math.floor(Math.random() * 500) - 250; // Increased range for more movement
+        var randomY = Math.floor(Math.random() * 500) - 250; // Increased range for more movement
+
+        button.style.transform = "translate(" + randomX + "px, " + randomY + "px)";
+    }
+</script>
+
+</body>
+</html>
